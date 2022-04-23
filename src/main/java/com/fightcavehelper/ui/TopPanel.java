@@ -1,5 +1,6 @@
 package com.fightcavehelper.ui;
 
+import com.fightcavehelper.State;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -10,11 +11,14 @@ import javax.swing.JPanel;
 
 public class TopPanel extends JPanel
 {
+	private final FightCaveHelperPanel panel;
+	State state;
 
-	public TopPanel()
+	public TopPanel(FightCaveHelperPanel panel, State state)
 	{
 		super();
-		//this.panel = panel;
+		this.panel = panel;
+		this.state = state;
 		JLabel title = new JLabel("Fight Cave Helper");
 		JButton reset = new JButton("Reset");
 
@@ -22,17 +26,7 @@ public class TopPanel extends JPanel
 		add(title, BorderLayout.WEST);
 		add(reset, BorderLayout.EAST);
 
-//		reset.addActionListener(new ActionListener()
-//		{
-//			@Override
-//			public void actionPerformed(ActionEvent e)
-//			{
-//				Component[] com = panel.getComponents();
-//				for (int a = 0; a < com.length; a++){
-//					com[a].setEnabled(false);
-//				}
-//			}
-//		}
+		reset.addActionListener(e -> state.reset());
 
 	}
 }

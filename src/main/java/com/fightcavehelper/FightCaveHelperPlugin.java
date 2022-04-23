@@ -20,23 +20,30 @@ public class FightCaveHelperPlugin extends Plugin {
 
     @Inject
     private ClientToolbar clientToolbar;
-    private NavigationButton navButton;
+
+    @Inject
+	@Getter
+	private NavigationButton navButton;
+	private FightCaveHelperPanel panel;
+    private State state;
 
 	@Override
     protected void startUp()
 	{
 		log.info("fight cave helper started.");
 
-        FightCaveHelperPanel panel = new FightCaveHelperPanel();
+		panel = new FightCaveHelperPanel(this);
+		state = new State();
 
         navButton = NavigationButton.builder()
                 .tooltip("Fight Cave Helper")
                 .icon(ImageUtil.getResourceStreamFromClass(getClass(), "/firecape.png"))
-                .priority(70)
+                .priority(50)
                 .panel(panel)
                 .build();
 
         clientToolbar.addNavigation(navButton);
+        //panel.update(state);
     }
 
     @Override
@@ -44,4 +51,16 @@ public class FightCaveHelperPlugin extends Plugin {
         clientToolbar.removeNavigation(navButton);
         log.info("fight cave helper stopped!");
     }
+
+    public void reset(State state)
+	{
+		state.reset();
+	}
+
+	public void setState(int rotation, int wave)
+	{
+		state.setRotation(rotation);
+		state.setWave(wave);
+		panel.update(state);
+	}
 }

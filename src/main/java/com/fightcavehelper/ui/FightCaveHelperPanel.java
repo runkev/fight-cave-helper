@@ -1,22 +1,29 @@
 package com.fightcavehelper.ui;
 
+import com.fightcavehelper.FightCaveHelperPlugin;
+import com.fightcavehelper.State;
+import com.fightcavehelper.Wave;
+import javax.inject.Singleton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.ui.PluginPanel;
 
 import java.awt.*;
 
+@Slf4j
+@Singleton
 public class FightCaveHelperPanel extends PluginPanel
 {
+	private final FightCaveHelperPlugin plugin;
 	private final JLabel title = new JLabel("Fight Caves Helper");
 	private final JButton reset = new JButton("Reset");
 
-	public FightCaveHelperPanel()
+	public FightCaveHelperPanel(FightCaveHelperPlugin plugin)
 	{
 		super();
-
 //		setLayout(new GridBagLayout());
 //		GridBagConstraints c = new GridBagConstraints();
 //
@@ -33,20 +40,40 @@ public class FightCaveHelperPanel extends PluginPanel
 //		c.gridy = 1;
 //		c.insets = new Insets(20, 0 ,0 ,0);
 //		add(wave2_panel, c);
-
+		this.plugin = plugin;
 		setLayout(new BorderLayout(1, 5));
 		JPanel northPanel = new JPanel(new BorderLayout());
 
 		// topPanel = new TopPanel();
-		StartWavePanel startWave_panel = new StartWavePanel(this);
+		Wave1Panel wave1Panel = new Wave1Panel(this);
+		Wave2Panel wave2Panel = new Wave2Panel(this);
 
 		northPanel.add(title, BorderLayout.WEST);
 		northPanel.add(reset, BorderLayout.EAST);
 		add(northPanel, BorderLayout.NORTH);
-		add(startWave_panel, BorderLayout.CENTER);
+		add(wave1Panel, BorderLayout.CENTER);
+		add(wave2Panel, BorderLayout.AFTER_LAST_LINE);
+
+		reset.setToolTipText("Reset Fight Cave Rotation");
+		reset.addActionListener(e -> plugin.reset(state));
 
 
 	}
+
+	public void update(State state)
+	{
+		SwingUtilities.invokeLater(() -> updatePanel(state));
+	}
+
+	public void updatePanel(State state)
+	{
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.weightx = 1;
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+	}
+
 }
 
 //@Slf4j
