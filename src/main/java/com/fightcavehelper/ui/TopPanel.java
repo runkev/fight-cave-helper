@@ -18,7 +18,7 @@ public class TopPanel extends JPanel
 	{
 		super();
 		this.panel = panel;
-		this.state = state;
+		//this.state = state;
 		JLabel title = new JLabel("Fight Cave Helper");
 		JButton reset = new JButton("Reset");
 

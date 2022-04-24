@@ -2,7 +2,6 @@ package com.fightcavehelper;
 
 import com.fightcavehelper.ui.FightCaveHelperPanel;
 import javax.inject.Inject;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -20,19 +19,16 @@ public class FightCaveHelperPlugin extends Plugin {
 
     @Inject
     private ClientToolbar clientToolbar;
-
-    @Inject
-	@Getter
 	private NavigationButton navButton;
 	private FightCaveHelperPanel panel;
-    private State state;
+    public State state;
 
 	@Override
     protected void startUp()
 	{
-		log.info("fight cave helper started.");
+		log.debug("fight cave helper started.");
 
-		panel = new FightCaveHelperPanel(this);
+		panel = new FightCaveHelperPanel(this, new Wave(0, 1));
 		state = new State();
 
         navButton = NavigationButton.builder()
@@ -43,7 +39,7 @@ public class FightCaveHelperPlugin extends Plugin {
                 .build();
 
         clientToolbar.addNavigation(navButton);
-        //panel.update(state);
+        panel.update(state);
     }
 
     @Override
@@ -57,10 +53,10 @@ public class FightCaveHelperPlugin extends Plugin {
 		state.reset();
 	}
 
-	public void setState(int rotation, int wave)
-	{
-		state.setRotation(rotation);
-		state.setWave(wave);
-		panel.update(state);
-	}
+//	public void setState(State state)
+//	{
+//		state.setRotation(rotation);
+//		state.setWave(wave);
+//		panel.update(state);
+//	}
 }

@@ -18,12 +18,12 @@ import java.awt.*;
 public class FightCaveHelperPanel extends PluginPanel
 {
 	private final FightCaveHelperPlugin plugin;
+	public Wave wave;
 	private final JLabel title = new JLabel("Fight Caves Helper");
 	private final JButton reset = new JButton("Reset");
 
-	public FightCaveHelperPanel(FightCaveHelperPlugin plugin)
+	public FightCaveHelperPanel(FightCaveHelperPlugin plugin, Wave wave)
 	{
-		super();
 //		setLayout(new GridBagLayout());
 //		GridBagConstraints c = new GridBagConstraints();
 //
@@ -41,21 +41,34 @@ public class FightCaveHelperPanel extends PluginPanel
 //		c.insets = new Insets(20, 0 ,0 ,0);
 //		add(wave2_panel, c);
 		this.plugin = plugin;
-		setLayout(new BorderLayout(1, 5));
+		this.wave = wave;
+		setLayout(new BorderLayout(5, 10));
 		JPanel northPanel = new JPanel(new BorderLayout());
+		JPanel centerPanel = new JPanel(new BorderLayout());
+		JPanel southPanel = new JPanel(new BorderLayout());
 
 		// topPanel = new TopPanel();
 		Wave1Panel wave1Panel = new Wave1Panel(this);
 		Wave2Panel wave2Panel = new Wave2Panel(this);
+		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel(this, wave);
 
 		northPanel.add(title, BorderLayout.WEST);
 		northPanel.add(reset, BorderLayout.EAST);
+
+		centerPanel.add(wave1Panel, BorderLayout.NORTH);
+		centerPanel.add(wave2Panel, BorderLayout.CENTER);
+
+		southPanel.add(waveSpawnPanel, BorderLayout.NORTH);
+
 		add(northPanel, BorderLayout.NORTH);
-		add(wave1Panel, BorderLayout.CENTER);
-		add(wave2Panel, BorderLayout.AFTER_LAST_LINE);
+		add(centerPanel, BorderLayout.CENTER);
+		add(southPanel, BorderLayout.SOUTH);
+//		add(wave1Panel, BorderLayout.CENTER);
+//		add(wave2Panel, BorderLayout.AFTER_LAST_LINE);
+//		add(waveSpawnPanel, BorderLayout.SOUTH);
 
 		reset.setToolTipText("Reset Fight Cave Rotation");
-		reset.addActionListener(e -> plugin.reset(state));
+		reset.addActionListener(e -> plugin.reset(plugin.state));
 
 
 	}
@@ -73,6 +86,8 @@ public class FightCaveHelperPanel extends PluginPanel
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 	}
+
+
 
 }
 
