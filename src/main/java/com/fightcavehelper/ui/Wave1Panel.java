@@ -1,5 +1,7 @@
 package com.fightcavehelper.ui;
 
+import com.fightcavehelper.FightCaveHelperPlugin;
+import com.fightcavehelper.Wave;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -7,19 +9,24 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.SocketAddress;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Wave1Panel extends JPanel
+public class Wave1Panel extends JPanel implements MouseListener
 {
-	private FightCaveHelperPanel panel;
+	private FightCaveHelperPlugin plugin;
+	private final Wave wave;
 
-	public Wave1Panel(FightCaveHelperPanel panel)
+
+	public Wave1Panel(FightCaveHelperPlugin plugin, Wave wave)
 	{
 		super();
 
-		this.panel = panel;
+		this.plugin = plugin;
+		this.wave = wave;
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -79,6 +86,36 @@ public class Wave1Panel extends JPanel
 //		add(se_btn);
 //		add(sw_btn);
 
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		plugin.setState(wave);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
 
 	}
 }

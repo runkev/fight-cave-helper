@@ -22,14 +22,17 @@ public class FightCaveHelperPlugin extends Plugin {
 	private NavigationButton navButton;
 	private FightCaveHelperPanel panel;
     public State state;
+	public Wave wave;
 
 	@Override
     protected void startUp()
 	{
 		log.debug("fight cave helper started.");
 
-		panel = new FightCaveHelperPanel(this, new Wave(0, 1));
+		panel = new FightCaveHelperPanel(this, state, new Wave(0, 1));
 		state = new State();
+		wave = new Wave(0, 1);
+
 
         navButton = NavigationButton.builder()
                 .tooltip("Fight Cave Helper")
@@ -53,10 +56,9 @@ public class FightCaveHelperPlugin extends Plugin {
 		state.reset();
 	}
 
-//	public void setState(State state)
-//	{
-//		state.setRotation(rotation);
-//		state.setWave(wave);
-//		panel.update(state);
-//	}
+	public void setState(Wave wave)
+	{
+		state.updateWave(wave);
+		panel.update(state);
+	}
 }

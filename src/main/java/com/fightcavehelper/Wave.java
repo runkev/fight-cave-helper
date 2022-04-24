@@ -1,26 +1,34 @@
 package com.fightcavehelper;
 
-import com.fightcavehelper.ui.FightCaveHelperPanel;
 import java.awt.image.BufferedImage;
 import net.runelite.client.util.ImageUtil;
 
 public class Wave
 {
-	private final int rotation;
-	private final int wave;
+	public int rotation;
+	public int number;
 	private String waveImgPath;
 	private BufferedImage image;
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
 
-	public Wave(int rotation, int wave)
+	public Wave(int rotation, int number)
 	{
 		this.rotation = rotation;
-		this.wave = wave;
-		this.waveImgPath = String.format(IMG_PATH, rotation, wave);
+		this.number = number;
+		this.waveImgPath = String.format(IMG_PATH, rotation, number);
 		this.image = ImageUtil.loadImageResource(getClass(), waveImgPath);
 	}
 
 	public BufferedImage getImage(){
 		return image;
+	}
+
+	public int getRotation()
+	{
+		return rotation;
+	}
+	public int getNumber()
+	{
+		return number;
 	}
 }

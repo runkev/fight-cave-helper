@@ -12,19 +12,20 @@ public class State
 		return rotation;
 	}
 
-	public void setRotation(int rotation)
-	{
-		this.rotation = rotation;
-	}
+//	public void setRotation(Wave wave)
+//	{
+//		this.rotation = wave.getRotation();
+//	}
 
 	public int getWave()
 	{
 		return wave;
 	}
 
-	public void setWave(int wave)
+	public void updateWave(Wave wave)
 	{
-		this.wave = wave;
+		this.rotation = wave.getRotation();
+		this.wave = wave.getNumber();
 	}
 
 	public void reset()
