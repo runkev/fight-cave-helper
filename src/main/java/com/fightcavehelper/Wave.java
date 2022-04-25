@@ -1,9 +1,15 @@
 package com.fightcavehelper;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import lombok.Builder;
 import net.runelite.client.util.ImageUtil;
 
-public class Wave
+public class Wave extends JPanel
 {
 	public int rotation;
 	public int number;
@@ -19,8 +25,11 @@ public class Wave
 		this.image = ImageUtil.loadImageResource(getClass(), waveImgPath);
 	}
 
-	public BufferedImage getImage(){
-		return image;
+	public ImageIcon getImage(int rotation, int number)
+	{
+		waveImgPath = String.format(IMG_PATH, rotation, number);
+		image = ImageUtil.loadImageResource(getClass(), waveImgPath);
+		return new ImageIcon(image);
 	}
 
 	public int getRotation()
@@ -31,4 +40,6 @@ public class Wave
 	{
 		return number;
 	}
+
+
 }
