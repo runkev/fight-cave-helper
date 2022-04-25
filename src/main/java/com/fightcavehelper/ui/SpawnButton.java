@@ -26,6 +26,7 @@ public class SpawnButton extends JButton
 			setForeground(Color.green);
 			setBackground(Color.gray);
 
+
 		});
 	}
 

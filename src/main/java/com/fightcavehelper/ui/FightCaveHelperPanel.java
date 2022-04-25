@@ -18,7 +18,6 @@ import java.awt.*;
 public class FightCaveHelperPanel extends PluginPanel
 {
 	private final FightCaveHelperPlugin plugin;
-	//private final State state;
 	public Wave wave;
 	private final JLabel title = new JLabel("Fight Cave Helper");
 	private final JButton reset = new JButton("Reset");
@@ -33,9 +32,9 @@ public class FightCaveHelperPanel extends PluginPanel
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		JPanel southPanel = new JPanel(new BorderLayout());
 
-		Wave1Panel wave1Panel = new Wave1Panel(plugin, wave);
-		Wave2Panel wave2Panel = new Wave2Panel(this);
-		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel(this, wave);
+		Wave1Panel wave1Panel = new Wave1Panel();
+		Wave2Panel wave2Panel = new Wave2Panel();
+		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel(wave);
 
 		northPanel.add(title, BorderLayout.WEST);
 		northPanel.add(reset, BorderLayout.EAST);
@@ -67,9 +66,9 @@ public class FightCaveHelperPanel extends PluginPanel
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		JPanel southPanel = new JPanel(new BorderLayout());
 
-		Wave1Panel wave1Panel = new Wave1Panel(plugin, wave);
-		Wave2Panel wave2Panel = new Wave2Panel(this);
-		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel(this, wave);
+		Wave1Panel wave1Panel = new Wave1Panel();
+		Wave2Panel wave2Panel = new Wave2Panel();
+		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel(wave);
 
 		northPanel.add(title, BorderLayout.WEST);
 		northPanel.add(reset, BorderLayout.EAST);

@@ -30,7 +30,7 @@ public class WaveSpawnPanel extends JPanel
 	private State state;
 	private Wave wave;
 
-	public WaveSpawnPanel(FightCaveHelperPanel panel, Wave wave)
+	public WaveSpawnPanel(Wave wave)
 	{
 		super();
 

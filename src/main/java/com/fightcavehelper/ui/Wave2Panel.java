@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 
 public class Wave2Panel extends JPanel
 {
-	private FightCaveHelperPanel panel;
+	private Wave1Panel panel;
 
-	public Wave2Panel(FightCaveHelperPanel panel)
+	public Wave2Panel()
 	{
 		super();
 
@@ -58,7 +58,6 @@ public class Wave2Panel extends JPanel
 		c.gridy = 1;
 		add(sw_btn, c);
 		sw_btn.setEnabled(false);
-
 	}
 }
 
