@@ -1,6 +1,7 @@
 package com.fightcavehelper.ui;
 
 import com.fightcavehelper.State;
+import com.fightcavehelper.Wave;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,7 +15,7 @@ public class SpawnButton extends JButton
 	private static final Dimension PREFERRED_SIZE = new Dimension(37, 40);
 	String text;
 
-	public SpawnButton(String text)
+	public SpawnButton(String text, Wave wave)
 	{
 		super(text);
 		this.text = text;
@@ -25,42 +26,8 @@ public class SpawnButton extends JButton
 		addActionListener(e -> {
 			setForeground(Color.green);
 			setBackground(Color.gray);
-
-
+			wave.addWaveSpawn(text);
 		});
 	}
-
-//	@Override
-//	public void actionPerformed(ActionEvent e)
-//	{
-//		setEnabled(false);
-//		setForeground(Color.GREEN);
-//		setBackground(Color.gray);
-//
-//		if (State.wave == 1 && text.equals("C"))
-//		{
-//			State.wave++;
-//			State.wave1 = text;
-//		}
-//		if (State.wave == 1 && text.equals("NW"))
-//		{
-//			State.wave++;
-//			State.wave1 = text;
-//		}
-//		if (State.wave == 1 && text.equals("S"))
-//		{
-//			State.wave++;
-//			State.wave1 = text;
-//		}
-//		if (State.wave == 1 && text.equals("SE"))
-//		{
-//			State.wave++;
-//			State.wave1 = text;
-//		}
-//		if (State.wave == 1 && text.equals("SW"))
-//		{
-//			State.wave++;
-//			State.wave1 = text;
-//		}
-	}
+}
 

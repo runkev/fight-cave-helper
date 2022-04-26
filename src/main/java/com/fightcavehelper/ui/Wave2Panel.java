@@ -1,5 +1,6 @@
 package com.fightcavehelper.ui;
 
+import com.fightcavehelper.Wave;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -9,7 +10,7 @@ public class Wave2Panel extends JPanel
 {
 	private Wave1Panel panel;
 
-	public Wave2Panel()
+	public Wave2Panel(Wave wave)
 	{
 		super();
 
@@ -24,40 +25,40 @@ public class Wave2Panel extends JPanel
 		c.gridy = 1;
 		add(label, c);
 
-		SpawnButton c_btn = new SpawnButton("C");
+		SpawnButton c_btn = new SpawnButton("C", wave);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
 		add(c_btn, c);
-		c_btn.setEnabled(false);
+		//c_btn.setEnabled(false);
 
-		SpawnButton nw_btn = new SpawnButton("NW");
+		SpawnButton nw_btn = new SpawnButton("NW", wave);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 1;
 		add(nw_btn, c);
-		nw_btn.setEnabled(false);
+		//nw_btn.setEnabled(false);
 
-		SpawnButton s_btn = new SpawnButton("S");
+		SpawnButton s_btn = new SpawnButton("S", wave);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 1;
 		add(s_btn, c);
-		s_btn.setEnabled(false);
+		//s_btn.setEnabled(false);
 
-		SpawnButton se_btn = new SpawnButton("SE");
+		SpawnButton se_btn = new SpawnButton("SE", wave);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 4;
 		c.gridy = 1;
 		add(se_btn, c);
-		se_btn.setEnabled(false);
+		//se_btn.setEnabled(false);
 
-		SpawnButton sw_btn = new SpawnButton("SW");
+		SpawnButton sw_btn = new SpawnButton("SW", wave);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 5;
 		c.gridy = 1;
 		add(sw_btn, c);
-		sw_btn.setEnabled(false);
+		//sw_btn.setEnabled(false);
 	}
 }
 

@@ -1,12 +1,10 @@
 package com.fightcavehelper;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import lombok.Builder;
 import net.runelite.client.util.ImageUtil;
 
 public class Wave extends JPanel
@@ -15,7 +13,10 @@ public class Wave extends JPanel
 	public int number;
 	private String waveImgPath;
 	private BufferedImage image;
+	private ImageIcon img;
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
+	public String spawn1;
+	public List<String> spawn2 = new ArrayList<>();
 
 	public Wave(int rotation, int number)
 	{
@@ -25,12 +26,18 @@ public class Wave extends JPanel
 		this.image = ImageUtil.loadImageResource(getClass(), waveImgPath);
 	}
 
-	public ImageIcon getImage(int rotation, int number)
+	public void setImage()
 	{
 		waveImgPath = String.format(IMG_PATH, rotation, number);
 		image = ImageUtil.loadImageResource(getClass(), waveImgPath);
-		return new ImageIcon(image);
+		img = new ImageIcon(image);
 	}
+
+	public ImageIcon getImage()
+	{
+		return img;
+	}
+
 
 	public int getRotation()
 	{
@@ -39,6 +46,60 @@ public class Wave extends JPanel
 	public int getNumber()
 	{
 		return number;
+	}
+
+	public void setRotation(int rotation)
+	{
+		this.rotation = rotation;
+	}
+
+	public void setNumber(int number)
+	{
+		this.number = number;
+	}
+
+	public void reset()
+	{
+		setRotation(0);
+		setNumber(1);
+		spawn1 = null;
+		spawn2.clear();
+	}
+
+	public void addWaveSpawn(String btn_value)
+	{
+		if (number == 1)
+		{
+			spawn1 = btn_value;
+			number++;
+		}
+
+		if (number == 2)
+		{
+			spawn2.add(btn_value);
+		}
+
+		if (spawn2.size() == 2)
+		{
+			if (spawn1.equals("C") && spawn2.contains("NW") && spawn2.contains("SW"))
+			{
+				rotation = 1;
+				number++;
+			}
+		}
+	}
+
+	public ImageIcon increment()
+	{
+		number++;
+		setImage();
+		return getImage();
+	}
+	public ImageIcon decrement()
+	{
+		number--;
+		setImage();
+		return getImage();
 	}
 
 
