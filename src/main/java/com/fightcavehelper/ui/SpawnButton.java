@@ -17,8 +17,10 @@ public class SpawnButton extends JButton
 		this.text = text;
 
 		setPreferredSize(PREFERRED_SIZE);
+		setBackground(null);
+		setForeground(Color.white);
 		setBorder(null);
-		setFont(new Font("Arial", Font.BOLD, 14));
+		setFont(new Font("Arial", Font.PLAIN, 14));
 
 		addActionListener(e -> click());
 	}

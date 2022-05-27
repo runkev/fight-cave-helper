@@ -1,6 +1,7 @@
 package com.fightcavehelper.ui;
 
 import com.fightcavehelper.Wave;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -20,8 +21,10 @@ public class Wave2Panel extends JPanel
 	public Wave2Panel()
 	{
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setBackground(null);
 		JLabel title = new JLabel("Wave 2: ");
 		title.setFont(new Font("Verdana", Font.PLAIN, 12));
+		title.setForeground(Color.white);
 
 		add(title);
 		createBtns();
@@ -37,12 +40,13 @@ public class Wave2Panel extends JPanel
 
 		for (JButton btn : btns)
 		{
-			setEnabled(false);
+			btn.setEnabled(false);
 			btn.addActionListener(e -> {
-				//setEnabled(false);
+				btn.setEnabled(false);
 				choices++;
 				disableBtns(btn.getText());
 				setSpawn2(btn);
+
 			});
 			add(btn);
 		}
@@ -52,7 +56,7 @@ public class Wave2Panel extends JPanel
 	{
 		for (JButton btn : btns)
 		{
-			setEnabled(true);
+			btn.setEnabled(true);
 		}
 	}
 
@@ -78,9 +82,9 @@ public class Wave2Panel extends JPanel
 	{
 		for (JButton btn : btns)
 		{
-			btn.setForeground(null);
+			btn.setForeground(Color.white);
 			btn.setBackground(null);
-			btn.setEnabled(true);
+			btn.setEnabled(false);
 		}
 		choices = 0;
 	}

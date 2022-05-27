@@ -1,5 +1,6 @@
 package com.fightcavehelper.ui;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -16,8 +17,10 @@ public class Wave1Panel extends JPanel
 	public Wave1Panel()
 	{
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setBackground(null);
 		JLabel title = new JLabel("Wave 1: ");
 		title.setFont(new Font("Verdana", Font.PLAIN, 12));
+		title.setForeground(Color.white);
 
 		add(title);
 		createBtns();
@@ -60,7 +63,7 @@ public class Wave1Panel extends JPanel
 	{
 		for (JButton btn : btns)
 		{
-			btn.setForeground(null);
+			btn.setForeground(Color.white);
 			btn.setBackground(null);
 			btn.setEnabled(true);
 		}
