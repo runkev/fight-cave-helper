@@ -17,11 +17,13 @@ public class Wave extends JPanel
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
 	public String spawn1;
 	public List<String> spawn2 = new ArrayList<>();
+	public List<String> spawn4 = new ArrayList<>();
+	private String initialSpawns;
 
-	public Wave(int rotation, int number)
+	public Wave()
 	{
-		this.rotation = rotation;
-		this.number = number;
+		this.rotation = 0;
+		this.number = 1;
 		this.waveImgPath = String.format(IMG_PATH, rotation, number);
 		this.image = ImageUtil.loadImageResource(getClass(), waveImgPath);
 	}
@@ -64,6 +66,7 @@ public class Wave extends JPanel
 		setNumber(1);
 		spawn1 = null;
 		spawn2.clear();
+		spawn4.clear();
 	}
 
 	public void addWaveSpawn(String btn_value)

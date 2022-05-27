@@ -1,6 +1,9 @@
 package com.fightcavehelper;
 
 import com.fightcavehelper.ui.FightCaveHelperPanel;
+import com.fightcavehelper.ui.TopPanel;
+import com.fightcavehelper.ui.Wave1Panel;
+import com.fightcavehelper.ui.Wave2Panel;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.plugins.Plugin;
@@ -20,19 +23,21 @@ public class FightCaveHelperPlugin extends Plugin {
     @Inject
     private ClientToolbar clientToolbar;
 	private NavigationButton navButton;
-	private FightCaveHelperPanel panel;
+	private final Wave wave = new Wave();
+	private final TopPanel topPanel = new TopPanel();
+	private final Wave1Panel wave1Panel = new Wave1Panel();
+	private final Wave2Panel wave2Panel	= new Wave2Panel();
+
 
 	@Override
     protected void startUp()
 	{
 		log.debug("fight cave helper started.");
-
-		panel = new FightCaveHelperPanel(this, new Wave(0, 1));
-
+		FightCaveHelperPanel panel = new FightCaveHelperPanel(wave, topPanel, wave1Panel, wave2Panel);
 
         navButton = NavigationButton.builder()
                 .tooltip("Fight Cave Helper")
-                .icon(ImageUtil.getResourceStreamFromClass(getClass(), "/firecape.png"))
+                .icon(ImageUtil.loadImageResource(getClass(), "/firecape.png"))
                 .priority(50)
                 .panel(panel)
                 .build();

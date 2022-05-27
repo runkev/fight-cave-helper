@@ -1,64 +1,99 @@
 package com.fightcavehelper.ui;
 
 import com.fightcavehelper.Wave;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Wave2Panel extends JPanel
 {
-	private Wave1Panel panel;
+	private String spawn2;
+	private int choices = 0;
+	ArrayList<JButton> btns = new ArrayList<>();
 
-	public Wave2Panel(Wave wave)
+	public Wave2Panel()
 	{
-		super();
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		JLabel title = new JLabel("Wave 2: ");
+		title.setFont(new Font("Verdana", Font.PLAIN, 12));
 
-		this.panel = panel;
-
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-
-		JLabel label = new JLabel("Wave 2:");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		add(label, c);
-
-		SpawnButton c_btn = new SpawnButton("C", wave);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 1;
-		c.gridy = 1;
-		add(c_btn, c);
-		//c_btn.setEnabled(false);
-
-		SpawnButton nw_btn = new SpawnButton("NW", wave);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 2;
-		c.gridy = 1;
-		add(nw_btn, c);
-		//nw_btn.setEnabled(false);
-
-		SpawnButton s_btn = new SpawnButton("S", wave);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 3;
-		c.gridy = 1;
-		add(s_btn, c);
-		//s_btn.setEnabled(false);
-
-		SpawnButton se_btn = new SpawnButton("SE", wave);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 4;
-		c.gridy = 1;
-		add(se_btn, c);
-		//se_btn.setEnabled(false);
-
-		SpawnButton sw_btn = new SpawnButton("SW", wave);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 5;
-		c.gridy = 1;
-		add(sw_btn, c);
-		//sw_btn.setEnabled(false);
+		add(title);
+		createBtns();
 	}
+
+	public void createBtns()
+	{
+		btns.add(new SpawnButton("C"));
+		btns.add(new SpawnButton("NW"));
+		btns.add(new SpawnButton("S"));
+		btns.add(new SpawnButton("SE"));
+		btns.add(new SpawnButton("SW"));
+
+		for (JButton btn : btns)
+		{
+			setEnabled(false);
+			btn.addActionListener(e -> {
+				//setEnabled(false);
+				choices++;
+				disableBtns(btn.getText());
+				setSpawn2(btn);
+			});
+			add(btn);
+		}
+	}
+
+	public void enableBtns()
+	{
+		for (JButton btn : btns)
+		{
+			setEnabled(true);
+		}
+	}
+
+	public void disableBtns(String text)
+	{
+		if (choices >= 2)
+		{
+			for (JButton btn : btns)
+			{
+				if (!btn.getText().equals(text))
+				{
+					btn.setEnabled(false);
+				}
+			}
+		}
+	}
+
+	public void setSpawn2(JButton btn){spawn2 = btn.getText();}
+
+	public String getSpawn2() {return spawn2;}
+
+	public void resetBtns()
+	{
+		for (JButton btn : btns)
+		{
+			btn.setForeground(null);
+			btn.setBackground(null);
+			btn.setEnabled(true);
+		}
+		choices = 0;
+	}
+
+	public void addBtnListener2 (ActionListener listenForBtn)
+	{
+		for (JButton btn : btns)
+		{
+			setSpawn2(btn);
+			btn.addActionListener(listenForBtn);
+		}
+	}
+
+
 }
 
