@@ -1,7 +1,10 @@
 package com.fightcavehelper;
 
+import com.fightcavehelper.ui.ButtonPanel;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -9,101 +12,142 @@ import net.runelite.client.util.ImageUtil;
 
 public class Wave extends JPanel
 {
-	public int rotation;
-	public int number;
-	private String waveImgPath;
-	private BufferedImage image;
-	private ImageIcon img;
+	public static int rotation;
+	public static int number;
+	public static int number2;
+	private static String waveImgPath;
+	private static BufferedImage image;
+	private static BufferedImage image2;
+	private static ImageIcon img;
+	private static ImageIcon img2;
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
-	public String spawn1;
-	public List<String> spawn2 = new ArrayList<>();
-	public List<String> spawn4 = new ArrayList<>();
-	private String initialSpawns;
+	public static String spawn1;
+	public static String spawn2;
+	//public String spawn2B;
+
 
 	public Wave()
 	{
-		this.rotation = 0;
-		this.number = 1;
-		this.waveImgPath = String.format(IMG_PATH, rotation, number);
-		this.image = ImageUtil.loadImageResource(getClass(), waveImgPath);
-	}
-
-	public void setImage()
-	{
+		rotation = 0;
+		number = 1;
+		number2 = number++;
 		waveImgPath = String.format(IMG_PATH, rotation, number);
 		image = ImageUtil.loadImageResource(getClass(), waveImgPath);
+	}
+
+	public static void setImage()
+	{
+		waveImgPath = String.format(IMG_PATH, rotation, number);
+		image = ImageUtil.loadImageResource(Wave.class, waveImgPath);
 		img = new ImageIcon(image);
 	}
 
-	public ImageIcon getImage()
+	public static ImageIcon getImage()
 	{
 		return img;
 	}
 
+	public static void setNextImage()
+	{
+		String waveImgPath2 = String.format(IMG_PATH, rotation, number2);
+		image2 = ImageUtil.loadImageResource(Wave.class, waveImgPath2);
+		img2 = new ImageIcon(image2);
+	}
+	public ImageIcon getNextImage() { return img2; }
 
-	public int getRotation()
+
+	public static int getRotation()
 	{
 		return rotation;
 	}
-	public int getNumber()
+	public static int getNumber()
 	{
 		return number;
 	}
 
-	public void setRotation(int rotation)
+	public static void setRotation(int rotation)
 	{
-		this.rotation = rotation;
+		Wave.rotation = rotation;
 	}
 
-	public void setNumber(int number)
+	public static void setNumber(int number)
 	{
-		this.number = number;
+		Wave.number = number;
 	}
 
-	public void reset()
+	public static void reset()
 	{
 		setRotation(0);
 		setNumber(1);
 		spawn1 = null;
-		spawn2.clear();
-		spawn4.clear();
+		spawn2 = null;
+		//spawn2B = null;
+		setNextImage();
+		setImage();
 	}
 
-	public void addWaveSpawn(String btn_value)
+	public static void addWaveSpawn()
 	{
 		if (number == 1)
 		{
-			spawn1 = btn_value;
-			number++;
+			spawn1 = ButtonPanel.spawn1;
+			setImage();
+			//increment();
 		}
 
 		if (number == 2)
 		{
-			spawn2.add(btn_value);
-		}
+			spawn2 = ButtonPanel.spawn2A + ButtonPanel.spawn2B;
 
-		if (spawn2.size() == 2)
-		{
-			if (spawn1.equals("C") && spawn2.contains("NW") && spawn2.contains("SW"))
+			String s = spawn1 + sortString(spawn2);
+
+			switch (s)
 			{
-				rotation = 1;
-				number++;
+				case "CNSWW":
+					rotation = 1;
+					increment();
+					break;
+				case "CESS":
+					rotation = 2;
+					increment();
+					break;
+				case "CESSW":
+					rotation = 3;
+					increment();
+					break;
 			}
 		}
 	}
 
-	public ImageIcon increment()
+	public static String getSpawn1()
+	{
+		return spawn1;
+	}
+
+	public static String getSpawn2()
+	{
+		return spawn1;
+	}
+
+	public static void increment()
 	{
 		number++;
 		setImage();
-		return getImage();
+		setNextImage();
+		//return getImage();
 	}
-	public ImageIcon decrement()
+	public static void decrement()
 	{
 		number--;
 		setImage();
-		return getImage();
+		setNextImage();
+		//return getImage();
 	}
 
-
+	public static String sortString(String input)
+	{
+		char tempArr[] = input.toCharArray();
+		Arrays.sort(tempArr);
+		return new String(tempArr);
+	}
 }

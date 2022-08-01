@@ -1,5 +1,6 @@
 package com.fightcavehelper.ui;
 
+import com.fightcavehelper.Wave;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,14 +25,14 @@ public class TopPanel extends JPanel
 		resetBtn.setFont(new Font("Verdana", Font.PLAIN, 11));
 		resetBtn.setBackground(Color.darkGray);
 		resetBtn.setForeground(Color.white);
+		resetBtn.addActionListener(e -> {
+			ButtonPanel.resetBtns();
+			Wave.reset();
+		});
 
 
 		add(title, BorderLayout.WEST);
 		add(resetBtn, BorderLayout.EAST);
 	}
 
-	public void addResetListener(ActionListener listenForReset)
-	{
-		resetBtn.addActionListener(listenForReset);
-	}
 }
