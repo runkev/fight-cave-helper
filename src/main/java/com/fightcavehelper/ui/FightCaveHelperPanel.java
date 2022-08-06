@@ -1,11 +1,7 @@
 package com.fightcavehelper.ui;
 
-import com.fightcavehelper.Wave;
 import java.awt.BorderLayout;
 import javax.inject.Singleton;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.ui.PluginPanel;
 
@@ -13,16 +9,12 @@ import net.runelite.client.ui.PluginPanel;
 @Singleton
 public class FightCaveHelperPanel extends PluginPanel
 {
-	Wave wave = new Wave();
-	private final JLabel title = new JLabel("Fight Cave Helper");
-	private final JButton reset = new JButton("Reset");
-
 	public FightCaveHelperPanel()
 	{
 		super();
 
 		TopPanel topPanel = new TopPanel();
-		ButtonPanel buttonPanel = new ButtonPanel(this);
+		ButtonPanel buttonPanel = new ButtonPanel();
 		WaveSpawnPanel waveSpawnPanel = new WaveSpawnPanel();
 
 

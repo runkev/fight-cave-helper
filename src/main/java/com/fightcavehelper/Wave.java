@@ -1,11 +1,10 @@
 package com.fightcavehelper;
 
 import com.fightcavehelper.ui.ButtonPanel;
-import java.awt.Image;
+import com.fightcavehelper.ui.WaveSpawnPanel;
+import java.awt.Button;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import net.runelite.client.util.ImageUtil;
@@ -14,25 +13,22 @@ public class Wave extends JPanel
 {
 	public static int rotation;
 	public static int number;
-	public static int number2;
 	private static String waveImgPath;
 	private static BufferedImage image;
-	private static BufferedImage image2;
 	private static ImageIcon img;
-	private static ImageIcon img2;
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
-	public static String spawn1;
-	public static String spawn2;
-	//public String spawn2B;
+	public static String spawn1 = "-";
+	public static String spawn2 = "-";
+	public static String spawn4 = "-";
 
 
 	public Wave()
 	{
 		rotation = 0;
 		number = 1;
-		number2 = number++;
 		waveImgPath = String.format(IMG_PATH, rotation, number);
 		image = ImageUtil.loadImageResource(getClass(), waveImgPath);
+		img = new ImageIcon(image);
 	}
 
 	public static void setImage()
@@ -46,15 +42,6 @@ public class Wave extends JPanel
 	{
 		return img;
 	}
-
-	public static void setNextImage()
-	{
-		String waveImgPath2 = String.format(IMG_PATH, rotation, number2);
-		image2 = ImageUtil.loadImageResource(Wave.class, waveImgPath2);
-		img2 = new ImageIcon(image2);
-	}
-	public ImageIcon getNextImage() { return img2; }
-
 
 	public static int getRotation()
 	{
@@ -79,11 +66,11 @@ public class Wave extends JPanel
 	{
 		setRotation(0);
 		setNumber(1);
-		spawn1 = null;
-		spawn2 = null;
-		//spawn2B = null;
-		setNextImage();
+		spawn1 = "-";
+		spawn2 = "-";
+		spawn4 = "-";
 		setImage();
+		WaveSpawnPanel.updateWave();
 	}
 
 	public static void addWaveSpawn()
@@ -91,29 +78,95 @@ public class Wave extends JPanel
 		if (number == 1)
 		{
 			spawn1 = ButtonPanel.spawn1;
-			setImage();
-			//increment();
+			//setImage();
+			increment();
 		}
 
 		if (number == 2)
 		{
 			spawn2 = ButtonPanel.spawn2A + ButtonPanel.spawn2B;
 
-			String s = spawn1 + sortString(spawn2);
+			String s = spawn1 + "-" + sortString(spawn2);
 
 			switch (s)
 			{
-				case "CNSWW":
+				case "C-NSWW":
 					rotation = 1;
-					increment();
+					updatePanel();
 					break;
-				case "CESS":
+				case "C-ESS":
 					rotation = 2;
+					updatePanel();
+					break;
+				case "C-ESSW":
+					rotation = 3;
+					updatePanel();
+					break;
+				case "NW-CS":
+					rotation = 4;
+					updatePanel();
+					break;
+				case "NW-CES":
+					rotation = 5;
+					updatePanel();
+					break;
+				case "NW-ESSW":
+					rotation = 6;
+					updatePanel();
+					break;
+				case "S-CNW":
+					ButtonPanel.enableWave4();
+					rotation = 0;
 					increment();
 					break;
-				case "CESSW":
-					rotation = 3;
-					increment();
+				case "S-ESSW":
+					rotation = 9;
+					updatePanel();
+					break;
+				case "S-ENSW":
+					rotation = 10;
+					updatePanel();
+					break;
+				case "SE-CSW":
+					rotation = 11;
+					updatePanel();
+					break;
+				case "SE-SSW":
+					rotation = 12;
+					updatePanel();
+					break;
+				case "SW-CNW":
+					rotation = 13;
+					updatePanel();
+					break;
+				case "SW-NSW":
+					rotation = 14;
+					updatePanel();
+					break;
+				case "SW-ESS":
+					rotation = 15;
+					updatePanel();
+					break;
+//				default:
+//					Wave.reset();
+//					ButtonPanel.resetBtns();
+//					break;
+			}
+		}
+		if (number == 3)
+		{
+			spawn4 = ButtonPanel.spawn4A + ButtonPanel.spawn4B;
+			String s = sortString(spawn4);
+
+			switch (s)
+			{
+				case "ESS":
+					rotation = 7;
+					updatePanel();
+					break;
+				case "ESSW":
+					rotation = 8;
+					updatePanel();
 					break;
 			}
 		}
@@ -126,28 +179,31 @@ public class Wave extends JPanel
 
 	public static String getSpawn2()
 	{
-		return spawn1;
+		return sortString(spawn2);
 	}
 
 	public static void increment()
 	{
 		number++;
 		setImage();
-		setNextImage();
-		//return getImage();
 	}
 	public static void decrement()
 	{
 		number--;
 		setImage();
-		setNextImage();
-		//return getImage();
 	}
 
 	public static String sortString(String input)
 	{
-		char tempArr[] = input.toCharArray();
+		char[] tempArr = input.toCharArray();
 		Arrays.sort(tempArr);
 		return new String(tempArr);
 	}
+	public static void updatePanel()
+	{
+		ButtonPanel.hidePanel();
+		increment();
+		WaveSpawnPanel.enableButtons();
+	}
+
 }

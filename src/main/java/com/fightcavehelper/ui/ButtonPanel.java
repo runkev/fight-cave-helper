@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.image.Kernel;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,20 +19,26 @@ public class ButtonPanel extends JPanel
 	public static String spawn1;
 	public static String spawn2A;
 	public static String spawn2B;
-	private String spawn4;
+	public static String spawn4A;
+	public static String spawn4B;
 	private static int choices = 0;
+	private static int choices4 = 0;
 	static ArrayList<JButton> btns1 = new ArrayList<>();
 	static ArrayList<JButton> btns2 = new ArrayList<>();
-	ArrayList<JButton> btns4 = new ArrayList<>();
+	static ArrayList<JButton> btns4 = new ArrayList<>();
 
-	private final FightCaveHelperPanel panel;
+	//private final FightCaveHelperPanel panel;
 	private final GridBagConstraints c;
+	public static JLabel wave1 = new JLabel("Wave 1:");
+	public static JLabel wave2 = new JLabel("Wave 2:");
+	public static JLabel wave4 = new JLabel("Wave 4:");
 
-	public ButtonPanel(FightCaveHelperPanel panel)
+
+	public ButtonPanel()
 	{
 		super();
 
-		this.panel = panel;
+		//this.panel = panel;
 
 		setLayout(new GridBagLayout());
 
@@ -49,13 +54,15 @@ public class ButtonPanel extends JPanel
 //		title.setForeground(Color.white);
 //		add(title);
 
-//		JLabel wave1 = new JLabel("Wave 1:");
-//		add(wave1);
+		add(wave1);
 		createBtns1();
 
-//		JLabel wave2 = new JLabel("Wave 2:");
-//		add(wave2);
+		add(wave2);
 		createBtns2();
+
+		add(wave4);
+		wave4.setVisible(false);
+		createBtns4();
 	}
 
 	public void createBtns1()
@@ -68,14 +75,17 @@ public class ButtonPanel extends JPanel
 		btns1.add(new SpawnButton("SE"));
 		btns1.add(new SpawnButton("SW"));
 
+		addComp(wave1);
+
 		for (JButton btn : btns1)
 		{
 			btn.addActionListener(e -> {
 				disableBtns1();
 				setSpawn1(btn);
 				enableBtns2();
-				Wave.increment();
 				Wave.addWaveSpawn();
+				WaveSpawnPanel.updateWave();
+
 			});
 			add(btn);
 			addComp(btn);
@@ -105,18 +115,16 @@ public class ButtonPanel extends JPanel
 		btns2.add(new SpawnButton("SE"));
 		btns2.add(new SpawnButton("SW"));
 
+		addComp(wave2);
+
 		for (JButton btn : btns2)
 		{
 			btn.setEnabled(false);
 			btn.addActionListener(e -> {
 				btn.setEnabled(false);
-				choices++;
+				//choices++;
 				disableBtns2(btn.getText());
 				setSpawn2(btn);
-				Wave.increment();
-				Wave.addWaveSpawn();
-				WaveSpawnPanel.wave_number.setText("Wave: "+ Wave.getNumber());
-
 			});
 			add(btn);
 			addComp(btn);
@@ -133,6 +141,10 @@ public class ButtonPanel extends JPanel
 
 	public void disableBtns2(String text)
 	{
+		if (choices < 2)
+		{
+
+		}
 		if (choices >= 2)
 		{
 			for (JButton btn : btns2)
@@ -151,33 +163,118 @@ public class ButtonPanel extends JPanel
 		{
 			spawn2A = btn.getText();
 			btn.setBackground(Color.green);
-			choices++;
 		}
 		else
 		{
 			spawn2B = btn.getText();
 			btn.setBackground(Color.green);
-			Wave.increment();
+			//Wave.increment();
+			Wave.addWaveSpawn();
+			WaveSpawnPanel.updateWave();
+		}
+		choices++;
+	}
+
+	public void createBtns4()
+	{
+
+//		btns4.add(new SpawnButton("C"));
+//		btns4.add(new SpawnButton("NW"));
+		btns4.add(new SpawnButton("S"));
+		btns4.add(new SpawnButton("SE"));
+		btns4.add(new SpawnButton("SW"));
+
+		addComp(wave4);
+
+		for (JButton btn : btns4)
+		{
+			btn.setEnabled(false);
+			btn.setVisible(false);
+			btn.addActionListener(e -> {
+				btn.setEnabled(false);
+				//choices++;
+				//disableBtns4();
+				setSpawn4(btn);
+			});
+			add(btn);
+			addComp(btn);
 		}
 	}
+
+	public void disableBtns4()
+	{
+		for (JButton btn : btns4)
+		{
+			btn.setEnabled(false);
+		}
+	}
+
+	public void setSpawn4(JButton btn)
+	{
+		if (choices4 == 0)
+		{
+			spawn4A = btn.getText();
+			btn.setBackground(Color.green);
+		}
+		else
+		{
+			spawn4B = btn.getText();
+			btn.setBackground(Color.green);
+			Wave.addWaveSpawn();
+			WaveSpawnPanel.updateWave();
+		}
+		choices4++;
+	}
+
+	public static void enableWave4()
+	{
+		for (JButton btn : btns2)
+		{
+			btn.setEnabled(false);
+		}
+
+		wave4.setVisible(true);
+
+		for (JButton btn : btns4)
+		{
+			btn.setEnabled(true);
+			btn.setVisible(true);
+		}
+	}
+
 
 	public static void resetBtns()
 	{
 		choices = 0;
-		spawn1 = null;
-		spawn2A = null;
-		spawn2B = null;
+		choices4 = 0;
+		spawn1 = "-";
+		spawn2A = "-";
+		spawn2B = "-";
+		spawn4A = "-";
+		spawn4B = "-";
+		wave1.setVisible(true);
+		wave2.setVisible(true);
+		wave4.setVisible(false);
 		for (JButton btn : btns1)
 		{
 			btn.setForeground(Color.white);
 			btn.setBackground(null);
 			btn.setEnabled(true);
+			btn.setVisible(true);
 		}
 		for (JButton btn : btns2)
 		{
 			btn.setForeground(Color.white);
 			btn.setBackground(null);
 			btn.setEnabled(false);
+			btn.setVisible(true);
+		}
+		for (JButton btn : btns4)
+		{
+			btn.setForeground(Color.white);
+			btn.setBackground(null);
+			btn.setEnabled(false);
+			btn.setVisible(false);
 		}
 	}
 
@@ -188,18 +285,40 @@ public class ButtonPanel extends JPanel
 			case 0:
 				c.insets = INSETS_LEFT_BORDER;
 				break;
-			case 5:
+			case 6:
 				c.insets = INSETS_RIGHT_BORDER;
 				break;
 			default:
 				c.insets = INSETS;
 		}
-		if (c.gridwidth == 5)
+		if (c.gridwidth == 6)
 		{
 			c.insets = INSETS_RIGHT_BORDER;
 		}
 		add(component, c);
-		c.gridx = ++c.gridx % 5;
-		c.gridy = c.gridx == 0 ? ++c.gridy : c.gridy;
+		c.gridx = ++c.gridx % 6;
+		if (c.gridx == 0)
+		{
+			++c.gridy;
+		}
+	}
+
+	public static void hidePanel()
+	{
+		wave1.setVisible(false);
+		wave2.setVisible(false);
+		wave4.setVisible(false);
+		for (JButton btn : btns1)
+		{
+			btn.setVisible(false);
+		}
+		for (JButton btn : btns2)
+		{
+			btn.setVisible(false);
+		}
+		for (JButton btn : btns4)
+		{
+			btn.setVisible(false);
+		}
 	}
 }

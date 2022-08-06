@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 public class SpawnButton extends JButton
 {
-	private static final Dimension PREFERRED_SIZE = new Dimension(36, 36);
+	private static final Dimension PREFERRED_SIZE = new Dimension(33, 33);
 	//String text;
 
 	public SpawnButton(String text)
@@ -20,7 +20,7 @@ public class SpawnButton extends JButton
 		setBackground(null);
 		setForeground(Color.white);
 		setBorder(null);
-		setFont(new Font("Arial", Font.PLAIN, 14));
+		setFont(new Font("Arial", Font.PLAIN, 12));
 
 //		addActionListener(e -> click());
 	}

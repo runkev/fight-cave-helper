@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 public class TopPanel extends JPanel
 {
-	private final JButton resetBtn = new JButton("Reset");
 
 	public TopPanel()
 	{
@@ -22,6 +21,7 @@ public class TopPanel extends JPanel
 		title.setForeground(Color.white);
 		title.setFont(new Font("Verdana", Font.BOLD, 12));
 
+		JButton resetBtn = new JButton("Reset");
 		resetBtn.setFont(new Font("Verdana", Font.PLAIN, 11));
 		resetBtn.setBackground(Color.darkGray);
 		resetBtn.setForeground(Color.white);
