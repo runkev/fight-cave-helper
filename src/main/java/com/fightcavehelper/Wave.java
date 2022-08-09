@@ -82,7 +82,7 @@ public class Wave extends JPanel
 			increment();
 		}
 
-		if (number == 2)
+		else if (number == 2)
 		{
 			spawn2 = ButtonPanel.spawn2A + ButtonPanel.spawn2B;
 
@@ -147,13 +147,14 @@ public class Wave extends JPanel
 					rotation = 15;
 					updatePanel();
 					break;
-//				default:
-//					Wave.reset();
-//					ButtonPanel.resetBtns();
-//					break;
+				default:
+					ButtonPanel.resetBtns();
+					Wave.reset();
+					System.out.println("Invalid selection, try again");
+					//updatePanel();
 			}
 		}
-		if (number == 3)
+		else //(number == 3)
 		{
 			spawn4 = ButtonPanel.spawn4A + ButtonPanel.spawn4B;
 			String s = sortString(spawn4);
@@ -168,6 +169,11 @@ public class Wave extends JPanel
 					rotation = 8;
 					updatePanel();
 					break;
+				default:
+					ButtonPanel.resetBtns();
+					Wave.reset();
+					System.out.println("Invalid selection, try again");
+					//updatePanel();
 			}
 		}
 	}

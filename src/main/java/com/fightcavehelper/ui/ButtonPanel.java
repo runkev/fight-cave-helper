@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -104,6 +105,7 @@ public class ButtonPanel extends JPanel
 	{
 		spawn1 = btn.getText();
 		btn.setBackground(Color.green);
+		Debug();
 	}
 
 	public void createBtns2()
@@ -135,16 +137,19 @@ public class ButtonPanel extends JPanel
 	{
 		for (JButton btn : btns2)
 		{
-			btn.setEnabled(true);
+			if (!Objects.equals(btn.getText(), spawn1))
+			{
+				btn.setEnabled(true);
+			}
 		}
 	}
 
 	public void disableBtns2(String text)
 	{
-		if (choices < 2)
-		{
-
-		}
+//		if (choices < 2)
+//		{
+//
+//		}
 		if (choices >= 2)
 		{
 			for (JButton btn : btns2)
@@ -163,6 +168,7 @@ public class ButtonPanel extends JPanel
 		{
 			spawn2A = btn.getText();
 			btn.setBackground(Color.green);
+			Debug();
 		}
 		else
 		{
@@ -171,6 +177,7 @@ public class ButtonPanel extends JPanel
 			//Wave.increment();
 			Wave.addWaveSpawn();
 			WaveSpawnPanel.updateWave();
+			Debug();
 		}
 		choices++;
 	}
@@ -276,6 +283,7 @@ public class ButtonPanel extends JPanel
 			btn.setEnabled(false);
 			btn.setVisible(false);
 		}
+		Debug();
 	}
 
 	private void addComp(Component component)
@@ -321,4 +329,15 @@ public class ButtonPanel extends JPanel
 			btn.setVisible(false);
 		}
 	}
+
+	public static void Debug()
+	{
+		System.out.println("Spawn1 = " + spawn1);
+		System.out.println("Spawn2A = " + spawn2A);
+		System.out.println("Spawn2B = " + spawn2B);
+		System.out.println("Choices = " + choices);
+		System.out.println("Rotation = " + Wave.rotation);
+		System.out.println("Wave Number = " + Wave.number);
+	}
+
 }
