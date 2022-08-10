@@ -20,6 +20,7 @@ public class Wave extends JPanel
 	public static String spawn1 = "-";
 	public static String spawn2 = "-";
 	public static String spawn4 = "-";
+	public static String spawn2_sorted = "-";
 
 
 	public Wave()
@@ -86,9 +87,9 @@ public class Wave extends JPanel
 		{
 			spawn2 = ButtonPanel.spawn2A + ButtonPanel.spawn2B;
 
-			String s = spawn1 + "-" + sortString(spawn2);
+			spawn2_sorted = spawn1 + "-" + sortString(spawn2);
 
-			switch (s)
+			switch (spawn2_sorted)
 			{
 				case "C-NSWW":
 					rotation = 1;
@@ -115,15 +116,16 @@ public class Wave extends JPanel
 					updatePanel();
 					break;
 				case "S-CNW":
-					ButtonPanel.enableWave4();
+					//ButtonPanel.enableWave4();
 					rotation = 0;
-					increment();
+					updatePanel();
+					//increment();
 					break;
 				case "S-ESSW":
 					rotation = 9;
 					updatePanel();
 					break;
-				case "S-ENSW":
+				case "SE-NSW":
 					rotation = 10;
 					updatePanel();
 					break;
@@ -154,19 +156,22 @@ public class Wave extends JPanel
 					//updatePanel();
 			}
 		}
-		else //(number == 3)
+		else //if (number == 3)
 		{
 			spawn4 = ButtonPanel.spawn4A + ButtonPanel.spawn4B;
 			String s = sortString(spawn4);
+			WaveSpawnPanel.enableButtons(false);
 
 			switch (s)
 			{
 				case "ESS":
 					rotation = 7;
+					WaveSpawnPanel.enableButtons(true);
 					updatePanel();
 					break;
 				case "ESSW":
 					rotation = 8;
+					WaveSpawnPanel.enableButtons(true);
 					updatePanel();
 					break;
 				default:
@@ -209,7 +214,7 @@ public class Wave extends JPanel
 	{
 		ButtonPanel.hidePanel();
 		increment();
-		WaveSpawnPanel.enableButtons();
+		WaveSpawnPanel.enableButtons(true);
 	}
 
 }

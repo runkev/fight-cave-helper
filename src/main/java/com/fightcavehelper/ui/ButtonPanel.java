@@ -166,20 +166,21 @@ public class ButtonPanel extends JPanel
 	{
 		if (choices == 0)
 		{
+			choices++;
 			spawn2A = btn.getText();
 			btn.setBackground(Color.green);
-			Debug();
 		}
 		else
 		{
+			choices++;
 			spawn2B = btn.getText();
 			btn.setBackground(Color.green);
 			//Wave.increment();
 			Wave.addWaveSpawn();
 			WaveSpawnPanel.updateWave();
-			Debug();
 		}
-		choices++;
+		Debug();
+
 	}
 
 	public void createBtns4()
@@ -220,6 +221,7 @@ public class ButtonPanel extends JPanel
 	{
 		if (choices4 == 0)
 		{
+			choices4++;
 			spawn4A = btn.getText();
 			btn.setBackground(Color.green);
 		}
@@ -230,7 +232,7 @@ public class ButtonPanel extends JPanel
 			Wave.addWaveSpawn();
 			WaveSpawnPanel.updateWave();
 		}
-		choices4++;
+
 	}
 
 	public static void enableWave4()
@@ -262,6 +264,7 @@ public class ButtonPanel extends JPanel
 		wave1.setVisible(true);
 		wave2.setVisible(true);
 		wave4.setVisible(false);
+		WaveSpawnPanel.enableButtons(false);
 		for (JButton btn : btns1)
 		{
 			btn.setForeground(Color.white);
@@ -332,6 +335,7 @@ public class ButtonPanel extends JPanel
 
 	public static void Debug()
 	{
+		System.out.println("-------------------");
 		System.out.println("Spawn1 = " + spawn1);
 		System.out.println("Spawn2A = " + spawn2A);
 		System.out.println("Spawn2B = " + spawn2B);

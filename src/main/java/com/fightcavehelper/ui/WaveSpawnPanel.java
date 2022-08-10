@@ -83,6 +83,11 @@ public class WaveSpawnPanel extends JPanel
 				Wave.increment();
 				updateWave();
 			}
+			if (Wave.spawn2_sorted.equals("S-CNW") && Wave.number == 4 && Wave.rotation == 0)
+			{
+				ButtonPanel.enableWave4();
+				enableButtons(false);
+			}
 
 		});
 		add(next, c);
@@ -118,10 +123,10 @@ public class WaveSpawnPanel extends JPanel
 		spawn1.setText("S1: " + Wave.getSpawn1());
 		spawn2.setText("S2: " + Wave.getSpawn2());
 	}
-	public static void enableButtons()
+	public static void enableButtons(boolean state)
 	{
-		next.setEnabled(true);
-		back.setEnabled(true);
+		next.setEnabled(state);
+		back.setEnabled(state);
 	}
 
 }
