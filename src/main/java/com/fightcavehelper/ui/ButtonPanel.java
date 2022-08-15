@@ -105,7 +105,7 @@ public class ButtonPanel extends JPanel
 	{
 		spawn1 = btn.getText();
 		btn.setBackground(Color.green);
-		Debug();
+		//Debug();
 	}
 
 	public void createBtns2()
@@ -179,7 +179,7 @@ public class ButtonPanel extends JPanel
 			Wave.addWaveSpawn();
 			WaveSpawnPanel.updateWave();
 		}
-		Debug();
+		//Debug();
 
 	}
 
@@ -286,7 +286,7 @@ public class ButtonPanel extends JPanel
 			btn.setEnabled(false);
 			btn.setVisible(false);
 		}
-		Debug();
+		//Debug();
 	}
 
 	private void addComp(Component component)
