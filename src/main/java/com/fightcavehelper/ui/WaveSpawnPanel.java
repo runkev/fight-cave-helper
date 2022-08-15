@@ -78,7 +78,7 @@ public class WaveSpawnPanel extends JPanel
 		next.setBackground(Color.green);
 		next.setEnabled(false);
 		next.addActionListener(e -> {
-			if(Wave.number > 2)
+			if(Wave.number > 2 && Wave.number < 63)
 			{
 				Wave.increment();
 				updateWave();
