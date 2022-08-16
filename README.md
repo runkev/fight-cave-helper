@@ -14,10 +14,10 @@ Once the rotation is determined just click the Next Button to move to the next w
 
 To start over from wave 1, hit the Reset Button at the top.
 
-https://imgur.com/l0X8KN3
+![](src/main/resources/readme-files/wave-selection-basic.gif)
 
 ***NOTE:*** Rotations 7 and 8 have an extra step, where you need to select the spawn buttons for wave 4 monsters:
 
-https://imgur.com/aYujaWM
+![](src/main/resources/readme-files/wave-selection-4.gif)
 
 If you click an invalid spawn combination for wave 2 (or wave 4), the helper will be reset to wave 1.
