@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +28,14 @@ public class TopPanel extends JPanel
 		resetBtn.setForeground(Color.white);
 		resetBtn.addActionListener(e -> {
 			ButtonPanel.resetBtns();
-			Wave.reset();
+			try
+			{
+				Wave.reset();
+			}
+			catch (IOException ex)
+			{
+				throw new RuntimeException(ex);
+			}
 		});
 
 

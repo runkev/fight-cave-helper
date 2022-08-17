@@ -2,9 +2,12 @@ package com.fightcavehelper;
 
 import com.fightcavehelper.ui.ButtonPanel;
 import com.fightcavehelper.ui.WaveSpawnPanel;
-import java.awt.Button;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import net.runelite.client.util.ImageUtil;
@@ -14,35 +17,52 @@ public class Wave extends JPanel
 	public static int rotation;
 	public static int number;
 	private static String waveImgPath;
+	private static String url;
 	private static BufferedImage image;
 	private static ImageIcon img;
 	public static final String IMG_PATH = "/waves/%s-%s.jpg";
+	//public static final String URL_PATH = "https://www.dropbox.com/home/fight-cave-waves?preview=%s-%s.jpg";
 	public static String spawn1 = "-";
 	public static String spawn2 = "-";
 	public static String spawn4 = "-";
 	public static String spawn2_sorted = "-";
 
 
-	public Wave()
+	public Wave() //throws IOException
 	{
 		rotation = 0;
 		number = 1;
 		waveImgPath = String.format(IMG_PATH, rotation, number);
 		image = ImageUtil.loadImageResource(getClass(), waveImgPath);
 		img = new ImageIcon(image);
+//		try
+//		{
+//		url = String.format(URL_PATH, rotation, number);
+//		image = ImageIO.read(new URL(url));
+//		img = new ImageIcon(image);
+//		}
+//		catch (IOException e){
+//			e.printStackTrace();
+//		}
 	}
 
-	public static void setImage()
+	public static void setImage() //throws IOException
 	{
 		waveImgPath = String.format(IMG_PATH, rotation, number);
 		image = ImageUtil.loadImageResource(Wave.class, waveImgPath);
 		img = new ImageIcon(image);
+//		try
+//		{
+//		url = String.format(URL_PATH, rotation, number);
+//		image = ImageIO.read(new URL(url));
+//		img = new ImageIcon(image);
+//		}
+//		catch (IOException e){
+//			e.printStackTrace();
+//		}
 	}
 
-	public static ImageIcon getImage()
-	{
-		return img;
-	}
+	public static ImageIcon getImage() { return img; }
 
 	public static int getRotation()
 	{
@@ -63,7 +83,7 @@ public class Wave extends JPanel
 		Wave.number = number;
 	}
 
-	public static void reset()
+	public static void reset() throws IOException
 	{
 		setRotation(0);
 		setNumber(1);
@@ -74,12 +94,11 @@ public class Wave extends JPanel
 		WaveSpawnPanel.updateWave();
 	}
 
-	public static void addWaveSpawn()
+	public static void addWaveSpawn() throws IOException
 	{
 		if (number == 1)
 		{
 			spawn1 = ButtonPanel.spawn1;
-			//setImage();
 			increment();
 		}
 
@@ -193,12 +212,12 @@ public class Wave extends JPanel
 		return sortString(spawn2);
 	}
 
-	public static void increment()
+	public static void increment() throws IOException
 	{
 		number++;
 		setImage();
 	}
-	public static void decrement()
+	public static void decrement() throws IOException
 	{
 		number--;
 		setImage();
@@ -210,7 +229,7 @@ public class Wave extends JPanel
 		Arrays.sort(tempArr);
 		return new String(tempArr);
 	}
-	public static void updatePanel()
+	public static void updatePanel() throws IOException
 	{
 		ButtonPanel.hidePanel();
 		increment();

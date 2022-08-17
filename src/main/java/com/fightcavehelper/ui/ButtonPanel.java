@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.JButton;
@@ -84,7 +85,14 @@ public class ButtonPanel extends JPanel
 				disableBtns1();
 				setSpawn1(btn);
 				enableBtns2();
-				Wave.addWaveSpawn();
+				try
+				{
+					Wave.addWaveSpawn();
+				}
+				catch (IOException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 				WaveSpawnPanel.updateWave();
 
 			});
@@ -126,7 +134,14 @@ public class ButtonPanel extends JPanel
 				btn.setEnabled(false);
 				//choices++;
 				disableBtns2(btn.getText());
-				setSpawn2(btn);
+				try
+				{
+					setSpawn2(btn);
+				}
+				catch (IOException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 			});
 			add(btn);
 			addComp(btn);
@@ -162,7 +177,7 @@ public class ButtonPanel extends JPanel
 		}
 	}
 
-	public void setSpawn2(JButton btn)
+	public void setSpawn2(JButton btn) throws IOException
 	{
 		if (choices == 0)
 		{
@@ -202,7 +217,14 @@ public class ButtonPanel extends JPanel
 				btn.setEnabled(false);
 				//choices++;
 				//disableBtns4();
-				setSpawn4(btn);
+				try
+				{
+					setSpawn4(btn);
+				}
+				catch (IOException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 			});
 			add(btn);
 			addComp(btn);
@@ -217,7 +239,7 @@ public class ButtonPanel extends JPanel
 		}
 	}
 
-	public void setSpawn4(JButton btn)
+	public void setSpawn4(JButton btn) throws IOException
 	{
 		if (choices4 == 0)
 		{

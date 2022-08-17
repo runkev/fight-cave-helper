@@ -1,6 +1,7 @@
 package com.fightcavehelper;
 
 import com.fightcavehelper.ui.FightCaveHelperPanel;
+import java.io.IOException;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.plugins.Plugin;
@@ -22,7 +23,7 @@ public class FightCaveHelperPlugin extends Plugin {
 	private NavigationButton navButton;
 
 	@Override
-    protected void startUp()
+    protected void startUp() throws IOException
 	{
 		log.debug("fight cave helper started.");
 		FightCaveHelperPanel panel = new FightCaveHelperPanel();

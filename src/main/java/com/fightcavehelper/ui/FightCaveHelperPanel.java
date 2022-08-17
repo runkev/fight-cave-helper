@@ -1,6 +1,7 @@
 package com.fightcavehelper.ui;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.ui.PluginPanel;
@@ -9,7 +10,7 @@ import net.runelite.client.ui.PluginPanel;
 @Singleton
 public class FightCaveHelperPanel extends PluginPanel
 {
-	public FightCaveHelperPanel()
+	public FightCaveHelperPanel() throws IOException
 	{
 		super();
 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,7 +23,7 @@ public class WaveSpawnPanel extends JPanel
 	public static JButton back = new JButton("Back");
 
 
-	public WaveSpawnPanel()
+	public WaveSpawnPanel() throws IOException
 	{
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -80,7 +81,14 @@ public class WaveSpawnPanel extends JPanel
 		next.addActionListener(e -> {
 			if(Wave.number > 2 && Wave.number < 63)
 			{
-				Wave.increment();
+				try
+				{
+					Wave.increment();
+				}
+				catch (IOException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 				updateWave();
 			}
 			if (Wave.spawn2_sorted.equals("S-CNW") && Wave.number == 4 && Wave.rotation == 0)
@@ -103,7 +111,14 @@ public class WaveSpawnPanel extends JPanel
 		back.addActionListener(e -> {
 			if(Wave.number > 3)
 			{
-				Wave.decrement();
+				try
+				{
+					Wave.decrement();
+				}
+				catch (IOException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 				updateWave();
 			}
 
